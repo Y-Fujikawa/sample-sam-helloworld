@@ -85,7 +85,8 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 sam deploy \
     --template-file packaged.yaml \
     --stack-name sam-app \
-    --capabilities CAPABILITY_IAM
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides SlackUrl=https://hooks.slack.com/services/XXXXXXXX
 ```
 
 > **See [Serverless Application Model (SAM) HOWTO Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-quick-start.html) for more details in how to get started.**
@@ -192,7 +193,8 @@ sam package \
 sam deploy \
     --template-file packaged.yaml \
     --stack-name sam-app \
-    --capabilities CAPABILITY_IAM
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides SlackUrl=https://hooks.slack.com/services/XXXXXXXX
 
 # Describe Output section of CloudFormation stack previously created
 aws cloudformation describe-stacks \

@@ -1,6 +1,7 @@
-// const axios = require('axios')
+const axios = require('axios')
 // const url = 'http://checkip.amazonaws.com/';
-let response;
+const SLACK_URL = process.env.SLACK_URL;
+let apiGWResponse;
 
 /**
  *
@@ -16,18 +17,30 @@ let response;
  */
 exports.lambdaHandler = async (event, context) => {
     try {
-        // const ret = await axios(url);
-        response = {
+        // const ret = axios(url);
+        apiGWResponse = {
             'statusCode': 200,
             'body': JSON.stringify({
                 message: 'hello world',
                 // location: ret.data.trim()
             })
         }
+
+        const options = {
+            text: "Message from slack bot!!",
+        };
+
+        await axios.post(SLACK_URL, JSON.stringify(options))
+        .then((response) => {
+            console.log('SUCCEEDED: Sent slack webhook: \n', response.data);
+        })
+        .catch((error) => {
+            console.log('FAILED: Send slack webhook', error);
+        });
     } catch (err) {
         console.log(err);
         return err;
     }
 
-    return response
+    return apiGWResponse
 };
