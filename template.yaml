@@ -23,6 +23,14 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+        CodePipelineEvent:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+              - aws.codepipeline
+              detail-type:
+              - CodePipeline Pipeline Execution State Change
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
